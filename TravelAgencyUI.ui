@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TravelAgencyUI</class>
+ <widget class="QMainWindow" name="TravelAgencyUI">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1208</width>
+    <height>585</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TravelAgencyUI</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>30</y>
+      <width>281</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="flightTab">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="accessibleName">
+      <string/>
+     </property>
+     <attribute name="title">
+      <string>Flugbuchung</string>
+     </attribute>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Id</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="flightIdLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>0</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ankunftsdatum</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="flightFromDateEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>30</y>
+        <width>110</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>70</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Abreisedatum</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="flightToDateEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>70</y>
+        <width>110</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>110</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="fromAirportLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>110</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>150</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ziel</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="toAirportLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>150</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>190</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Fluggesellschaft</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="airlineLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>190</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>230</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Preis</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="flightPriceEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>230</y>
+        <width>111</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>99999999.000000000000000</double>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="rentalCarTab">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <attribute name="title">
+      <string>Mietwagenreservierung</string>
+     </attribute>
+     <widget class="QDoubleSpinBox" name="rentalCarPriceEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>230</y>
+        <width>111</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>99999999999.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="companyLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>190</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>190</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Firma</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>110</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Abholstandort</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="rentalCarIdLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>0</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="returnLocationLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>150</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="pickupLocationLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>110</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="rentalCarFromDateEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>30</y>
+        <width>110</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ankunftsdatum</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Id</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>150</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rückgabestandort</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>70</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Abreisedatum</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>230</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Preis</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="rentalCarToDateEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>70</y>
+        <width>110</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="hotelTab">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <attribute name="title">
+      <string>Hotelbuchung</string>
+     </attribute>
+     <widget class="QDoubleSpinBox" name="hotelPriceEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>190</y>
+        <width>111</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>99999999999.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>190</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Preis</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>110</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Hotel</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="hotelIdLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>0</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="cityLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>150</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="hotelLineEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>110</y>
+        <width>113</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="hotelFromDateEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>30</y>
+        <width>110</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ankunftsdatum</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Id</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>150</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stadt</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_20">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>70</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Abreisedatum</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="hotelToDateEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>70</y>
+        <width>110</width>
+        <height>21</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="customerGroupBox">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>501</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Kund*In</string>
+    </property>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>70</y>
+       <width>49</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>110</y>
+       <width>49</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="customerIdLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>70</y>
+       <width>31</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="customerNameLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>110</y>
+       <width>231</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_23">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>160</y>
+       <width>49</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Reisen</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="customerTravelsTabWidget">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>160</y>
+       <width>405</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="cornerButtonEnabled">
+      <bool>true</bool>
+     </property>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>30</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Reise-ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Beginn der Reise</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Ende der Reise</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1208</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDatei">
+    <property name="title">
+     <string>Datei</string>
+    </property>
+    <addaction name="actionEinlesen"/>
+   </widget>
+   <widget class="QMenu" name="menuKund_Innen">
+    <property name="title">
+     <string>Kund*Innen</string>
+    </property>
+    <addaction name="actionSuchen"/>
+   </widget>
+   <addaction name="menuDatei"/>
+   <addaction name="menuKund_Innen"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionEinlesen">
+   <property name="text">
+    <string>Einlesen</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionSuchen">
+   <property name="text">
+    <string>Suchen</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
