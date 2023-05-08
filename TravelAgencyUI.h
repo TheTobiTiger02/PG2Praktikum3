@@ -25,13 +25,14 @@ public:
     QIcon getBookingIcon(Booking* booking);
     void loadTravels(long customerId);
     void loadBookings(long travelId);
+    void loadBookingDetails();
 
 private:
 
     enum travelsColumnIndices{TRAVEL_ID, TRAVEL_BEGIN, TRAVEL_END};
     enum bookingsColumnIndices{BOOKING_TYPE, BOOKING_START, BOOKING_END, BOOKING_PRICE};
     std::map<int, Booking*> bookingIndices;
-
+    Booking* activeBooking;
     QMessageBox* msgBox;
     TravelAgency *travelAgency;
     Ui::TravelAgencyUI *ui;

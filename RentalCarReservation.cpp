@@ -23,6 +23,8 @@ string RentalCarReservation::showDetails() {
     ". Rueckgabe am " + toDate + " in " + returnLocation + " mit der Fahrzeugklasse " + vehicleClass + ". Preis: " + ss.str() + " Euro";
 }
 
+
+
 const string &RentalCarReservation::getPickupLocation() const {
     return pickupLocation;
 }

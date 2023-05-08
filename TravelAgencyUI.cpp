@@ -144,28 +144,31 @@ QIcon TravelAgencyUI::getBookingIcon(Booking *booking) {
 }
 
 void TravelAgencyUI::onTravelBookingListDoubleClicked() {
-    Booking* booking = bookingIndices[ui->travelBookingsTableWidget->currentRow()];
+    activeBooking = bookingIndices[ui->travelBookingsTableWidget->currentRow()];
+    loadBookingDetails();
+}
 
+void TravelAgencyUI::loadBookingDetails() {
     ui->bookingGroupBox->setVisible(true);
-    ui->bookingIdLineEdit->setText(QString::fromStdString(booking->getId()));
-    ui->bookingStartDateEdit->setDate(booking->getFromDate());
-    ui->bookingEndDateEdit->setDate(booking->getToDate());
-    ui->bookingPriceEdit->setValue(booking->getPrice());
+    ui->bookingIdLineEdit->setText(QString::fromStdString(activeBooking->getId()));
+    ui->bookingStartDateEdit->setDate(activeBooking->getFromDate());
+    ui->bookingEndDateEdit->setDate(activeBooking->getToDate());
+    ui->bookingPriceEdit->setValue(activeBooking->getPrice());
 
-    if(FlightBooking* flightBooking = dynamic_cast<FlightBooking*>(booking)){
+    if(FlightBooking* flightBooking = dynamic_cast<FlightBooking*>(activeBooking)){
         ui->bookingTabWidget->setCurrentWidget(ui->flightTab);
         ui->flightStartLineEdit->setText(QString::fromStdString(flightBooking->getFromDestination()));
         ui->flightEndLineEdit->setText(QString::fromStdString(flightBooking->getToDestination()));
         ui->flightAirlineLineEdit->setText(QString::fromStdString(flightBooking->getAirline()));
         ui->flightClassLineEdit->setText(QString::fromStdString(flightBooking->getBookingClass()));
     }
-    else if(HotelBooking* hotelBooking = dynamic_cast<HotelBooking*>(booking)){
+    else if(HotelBooking* hotelBooking = dynamic_cast<HotelBooking*>(activeBooking)){
         ui->bookingTabWidget->setCurrentWidget(ui->hotelTab);
         ui->hotelNameLineEdit->setText(QString::fromStdString(hotelBooking->getHotel()));
         ui->hotelTownLineEdit->setText(QString::fromStdString(hotelBooking->getTown()));
         ui->hotelRoomLineEdit->setText(QString::fromStdString(hotelBooking->getRoomType()));
     }
-    else if(RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(booking)){
+    else if(RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(activeBooking)){
         ui->bookingTabWidget->setCurrentWidget(ui->rentalTab);
         ui->rentalPickupLineEdit->setText(QString::fromStdString(rentalCarReservation->getPickupLocation()));
         ui->rentalReturnLineEdit->setText(QString::fromStdString(rentalCarReservation->getReturnLocation()));
@@ -173,6 +176,7 @@ void TravelAgencyUI::onTravelBookingListDoubleClicked() {
         ui->rentalClassLineEdit->setText(QString::fromStdString(rentalCarReservation->getVehicleClass()));
     }
 }
+
 
 void TravelAgencyUI::onSaveBookingsButtonClicked() {
     Booking* booking = travelAgency->findBooking(ui->bookingIdLineEdit->text().toStdString());
@@ -205,7 +209,7 @@ void TravelAgencyUI::onSaveBookingsButtonClicked() {
 
 
 void TravelAgencyUI::onCancelBookingsButtonClicked() {
-    ui->bookingStartDateEdit->clear();
+    loadBookingDetails();
 }
 
 /*void TravelAgencyUI::addBookingToListWidget(std::vector<Booking *> bookings) {
