@@ -23,6 +23,14 @@ public:
     ~FlightBooking();
     std::string showDetails();
 
+    void setFromDestination(const std::string &fromDestination);
+
+    void setToDestination(const std::string &toDestination);
+
+    void setAirline(const std::string &airline);
+
+    void setBookingClass(const std::string &bookingClass);
+
     const std::string &getFromDestination() const;
 
     const std::string &getToDestination() const;

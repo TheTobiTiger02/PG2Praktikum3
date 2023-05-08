@@ -25,9 +25,9 @@ const std::vector<Booking *> &Travel::getTravelBookings() const {
 }
 
 QDate Travel::getStartDate() {
-    QDate startDate = QDate::fromString(QString::fromStdString(travelBookings.at(0)->getFromDate()), "yyyyMMdd");
+    QDate startDate = travelBookings.at(0)->getFromDate();
     for(auto b : travelBookings){
-        QDate newDate = QDate::fromString(QString::fromStdString(b->getFromDate()), "yyyyMMdd");
+        QDate newDate = b->getFromDate();
         if(newDate < startDate){
             startDate = newDate;
         }
@@ -36,9 +36,9 @@ QDate Travel::getStartDate() {
 }
 
 QDate Travel::getEndDate() {
-    QDate endDate = QDate::fromString(QString::fromStdString(travelBookings.at(0)->getToDate()), "yyyyMMdd");
+    QDate endDate = travelBookings.at(0)->getToDate();
     for(auto b : travelBookings){
-        QDate newDate = QDate::fromString(QString::fromStdString(b->getToDate()), "yyyyMMdd");
+        QDate newDate = b->getToDate();
         if(newDate > endDate){
             endDate = newDate;
         }

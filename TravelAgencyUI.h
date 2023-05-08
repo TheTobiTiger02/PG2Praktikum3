@@ -22,10 +22,16 @@ public:
     TravelAgencyUI(TravelAgency *_travelAgency, QWidget *parent = nullptr );
     ~TravelAgencyUI() override;
     void addBookingToListWidget(std::vector<Booking*> bookings);
+    QIcon getBookingIcon(Booking* booking);
+    void loadTravels(long customerId);
+    void loadBookings(long travelId);
 
 private:
 
-    enum columnIndices{TRAVEL_ID, TRAVEL_BEGIN, TRAVEL_END};
+    enum travelsColumnIndices{TRAVEL_ID, TRAVEL_BEGIN, TRAVEL_END};
+    enum bookingsColumnIndices{BOOKING_TYPE, BOOKING_START, BOOKING_END, BOOKING_PRICE};
+    std::map<int, Booking*> bookingIndices;
+
     QMessageBox* msgBox;
     TravelAgency *travelAgency;
     Ui::TravelAgencyUI *ui;
@@ -33,6 +39,11 @@ private:
 private slots:
     void onFileOpen();
     void onCustomerSearch();
+    void onCustomerTravelListDoubleClicked();
+    void onTravelBookingListDoubleClicked();
+    void onSaveBookingsButtonClicked();
+    void onCancelBookingsButtonClicked();
+
 
     //void onBookingListItemDoubleClicked(QListWidgetItem* item);
 };

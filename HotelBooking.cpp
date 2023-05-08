@@ -14,7 +14,6 @@ HotelBooking::HotelBooking(std::string id, double price, std::string fromDate, s
     roomTypes["SU"] = "Suite";
 
     roomType = roomTypes[roomType];
-    std::cout << roomType;
 
 }
 HotelBooking::~HotelBooking() {
@@ -39,4 +38,16 @@ const string &HotelBooking::getTown() const {
 
 const string &HotelBooking::getRoomType() const {
     return roomType;
+}
+
+void HotelBooking::setHotel(const string &hotel) {
+    HotelBooking::hotel = hotel;
+}
+
+void HotelBooking::setTown(const string &town) {
+    HotelBooking::town = town;
+}
+
+void HotelBooking::setRoomType(const string &roomType) {
+    HotelBooking::roomType = roomType;
 }

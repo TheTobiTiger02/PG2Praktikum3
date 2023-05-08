@@ -25,6 +25,12 @@ public:
 
     const std::string &getTown() const;
 
+    void setHotel(const std::string &hotel);
+
+    void setTown(const std::string &town);
+
+    void setRoomType(const std::string &roomType);
+
     const std::string &getRoomType() const;
 };
 

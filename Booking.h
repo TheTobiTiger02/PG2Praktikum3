@@ -5,6 +5,7 @@
 #ifndef PG2PRAKTIKUM1_BOOKING_H
 #define PG2PRAKTIKUM1_BOOKING_H
 #include <iostream>
+#include <QDate>
 
 
 class Booking {
@@ -24,12 +25,21 @@ public:
 
     double getPrice() const;
 
-    const std::string &getFromDate() const;
+    QDate getFromDate() const;
 
-    const std::string &getToDate() const;
+    QDate getToDate() const;
 
     long getTravelId() const;
 
+    void setId(const std::string &id);
+
+    void setPrice(double price);
+
+    void setFromDate(const std::string &fromDate);
+
+    void setToDate(const std::string &toDate);
+
+    void setTravelId(long travelId);
 };
 
 

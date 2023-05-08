@@ -20,6 +20,14 @@ public:
     ~RentalCarReservation();
     std::string showDetails();
 
+    void setPickupLocation(const std::string &pickupLocation);
+
+    void setReturnLocation(const std::string &returnLocation);
+
+    void setCompany(const std::string &company);
+
+    void setVehicleClass(const std::string &vehicleClass);
+
     const std::string &getPickupLocation() const;
 
     const std::string &getReturnLocation() const;

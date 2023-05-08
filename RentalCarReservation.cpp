@@ -38,3 +38,19 @@ const string &RentalCarReservation::getCompany() const {
 const string &RentalCarReservation::getVehicleClass() const {
     return vehicleClass;
 }
+
+void RentalCarReservation::setPickupLocation(const string &pickupLocation) {
+    RentalCarReservation::pickupLocation = pickupLocation;
+}
+
+void RentalCarReservation::setReturnLocation(const string &returnLocation) {
+    RentalCarReservation::returnLocation = returnLocation;
+}
+
+void RentalCarReservation::setCompany(const string &company) {
+    RentalCarReservation::company = company;
+}
+
+void RentalCarReservation::setVehicleClass(const string &vehicleClass) {
+    RentalCarReservation::vehicleClass = vehicleClass;
+}
