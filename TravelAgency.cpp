@@ -65,6 +65,9 @@ void TravelAgency::readFile(string filePath, int startRow, int flightCount, int 
             }
             type = data.at(i)["type"];
             id = data.at(i)["id"];
+            if(findBooking(id) != nullptr){
+                continue;
+            }
             price = data.at(i)["price"];
             fromDate = data.at(i)["fromDate"];
             toDate = data.at(i)["toDate"];
