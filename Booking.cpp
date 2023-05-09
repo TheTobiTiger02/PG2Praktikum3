@@ -4,8 +4,15 @@
 
 #include "Booking.h"
 
-Booking::Booking(std::string _id, double _price, std::string _fromDate, std::string _toDate, long _travelId) : id(_id), price(_price), fromDate(_fromDate), toDate(_toDate), travelId(_travelId) {
+Booking::Booking(std::string _id, double _price, std::string _fromDate, std::string _toDate, long _travelId) : id(_id),
+                                                                                                               price(_price),
+                                                                                                               fromDate(
+                                                                                                                       _fromDate),
+                                                                                                               toDate(_toDate),
+                                                                                                               travelId(
+                                                                                                                       _travelId) {
 }
+
 Booking::~Booking() {
     std::cout << "Booking object destroyed" << std::endl;
 }

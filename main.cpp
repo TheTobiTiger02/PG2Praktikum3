@@ -6,6 +6,7 @@
 #include <QApplication>
 #include <QTranslator>
 #include "TravelAgencyUI.h"
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -15,8 +16,6 @@ int main(int argc, char *argv[]) {
     TravelAgencyUI tu(&travelAgency);
     tu.show();
     return QApplication::exec();
-
-
 
 
 }

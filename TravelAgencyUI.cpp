@@ -8,22 +8,22 @@
 #include <QFileDialog>
 #include <iostream>
 #include <QMessageBox>
-#include <QLineEdit>
 #include <QAbstractButton>
 #include <QTranslator>
 #include <QInputDialog>
 
-TravelAgencyUI::TravelAgencyUI(TravelAgency *_travelAgency, QWidget *parent) : QMainWindow(parent), ui(new Ui::TravelAgencyUI), travelAgency(_travelAgency) {
+TravelAgencyUI::TravelAgencyUI(TravelAgency *_travelAgency, QWidget *parent) : QMainWindow(parent),
+                                                                               ui(new Ui::TravelAgencyUI),
+                                                                               travelAgency(_travelAgency) {
     ui->setupUi(this);
     connect(ui->actionEinlesen, SIGNAL(triggered()), this, SLOT(onFileOpen()));
     connect(ui->actionSuchen, SIGNAL(triggered(bool)), this, SLOT(onCustomerSearch()));
-    connect(ui->customerTravelsTableWidget, SIGNAL(itemDoubleClicked(QTableWidgetItem *)), this, SLOT(onCustomerTravelListDoubleClicked()));
-    connect(ui->travelBookingsTableWidget, SIGNAL(itemDoubleClicked(QTableWidgetItem *)), this, SLOT(onTravelBookingListDoubleClicked()));
+    connect(ui->customerTravelsTableWidget, SIGNAL(itemDoubleClicked(QTableWidgetItem * )), this,
+            SLOT(onCustomerTravelListDoubleClicked()));
+    connect(ui->travelBookingsTableWidget, SIGNAL(itemDoubleClicked(QTableWidgetItem * )), this,
+            SLOT(onTravelBookingListDoubleClicked()));
     connect(ui->saveBookingButton, SIGNAL(clicked(bool)), this, SLOT(onSaveBookingsButtonClicked()));
     connect(ui->cancelBookingButton, SIGNAL(clicked(bool)), this, SLOT(onCancelBookingsButtonClicked()));
-    //connect(ui->listWidget, &QListWidget::itemDoubleClicked(), this, SLOT(&onBookingListItemDoubleClicked()));
-    //connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &TravelAgencyUI::onBookingListItemDoubleClicked);
-    //this->setFixedSize(1200, 800);
     ui->customerGroupBox->setVisible(false);
     ui->customerTravelsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->customerTravelsTableWidget->setColumnWidth(0, 100);
@@ -40,10 +40,7 @@ TravelAgencyUI::TravelAgencyUI(TravelAgency *_travelAgency, QWidget *parent) : Q
     ui->bookingGroupBox->setVisible(false);
 
 
-
-
 }
-
 
 
 TravelAgencyUI::~TravelAgencyUI() {
@@ -53,20 +50,17 @@ TravelAgencyUI::~TravelAgencyUI() {
 void TravelAgencyUI::onFileOpen() {
     QString filePath = QFileDialog::getOpenFileName(this, "Datei auswählen", "*.json");
     travelAgency->readFile(filePath.toStdString());
-    /*ui->listWidget->clear();
-    addBookingToListWidget(travelAgency->getBookings());
-     */
-
 
 }
 
 void TravelAgencyUI::onCustomerSearch() {
     msgBox = new QMessageBox();
     long customerId = QInputDialog::getInt(this, "Kund*Innensuche", "ID");
-    Customer* customer = travelAgency->findCustomer(customerId);
-    if(customer == nullptr){
+    Customer *customer = travelAgency->findCustomer(customerId);
+    if (customer == nullptr) {
         msgBox->setWindowTitle("Kunde nicht gefunden");
-        msgBox->setText("Der Kunde mit der ID " + QString::fromStdString(std::to_string(customerId)) + " konnte nicht gefunden werden");
+        msgBox->setText("Der Kunde mit der ID " + QString::fromStdString(std::to_string(customerId)) +
+                        " konnte nicht gefunden werden");
         msgBox->exec();
         return;
     }
@@ -85,20 +79,24 @@ void TravelAgencyUI::loadTravels(long customerId) {
     ui->customerTravelsTableWidget->clearContents();
     QLocale locale(QLocale::German);
     int currentRow = 0;
-    for(auto t : travelAgency->getAllTravels()){
-        if(t->getCustomerId() == customerId){
+    for (auto t: travelAgency->getAllTravels()) {
+        if (t->getCustomerId() == customerId) {
 
             ui->customerTravelsTableWidget->setRowCount(currentRow + 1);
-            ui->customerTravelsTableWidget->setItem(currentRow, TRAVEL_ID, new QTableWidgetItem(QString::fromStdString(std::to_string(t->getId()))));
-            ui->customerTravelsTableWidget->setItem(currentRow, TRAVEL_BEGIN, new QTableWidgetItem(locale.toString(t->getStartDate(), "dddd, d. MMMM yyyy")));
-            ui->customerTravelsTableWidget->setItem(currentRow, TRAVEL_END, new QTableWidgetItem(locale.toString(t->getEndDate(), "dddd, d. MMMM yyyy")));
+            ui->customerTravelsTableWidget->setItem(currentRow, TRAVEL_ID, new QTableWidgetItem(
+                    QString::fromStdString(std::to_string(t->getId()))));
+            ui->customerTravelsTableWidget->setItem(currentRow, TRAVEL_BEGIN, new QTableWidgetItem(
+                    locale.toString(t->getStartDate(), "dddd, d. MMMM yyyy")));
+            ui->customerTravelsTableWidget->setItem(currentRow, TRAVEL_END, new QTableWidgetItem(
+                    locale.toString(t->getEndDate(), "dddd, d. MMMM yyyy")));
             currentRow = ui->customerTravelsTableWidget->rowCount();
         }
     }
 }
 
 void TravelAgencyUI::onCustomerTravelListDoubleClicked() {
-    long travelId = ui->customerTravelsTableWidget->item(ui->customerTravelsTableWidget->currentRow(), 0)->text().toLong();
+    long travelId = ui->customerTravelsTableWidget->item(ui->customerTravelsTableWidget->currentRow(),
+                                                         0)->text().toLong();
     loadBookings(travelId);
     ui->bookingGroupBox->setVisible(false);
 }
@@ -111,15 +109,18 @@ void TravelAgencyUI::loadBookings(long travelId) {
     ui->travelIdLineEdit->setText(QString::number(travelId));
     bookingIndices.clear();
     int index = 0;
-    for(auto b : travelAgency->getAllBookings()){
-        if(b->getTravelId() == travelId){
+    for (auto b: travelAgency->getAllBookings()) {
+        if (b->getTravelId() == travelId) {
             ui->travelBookingsTableWidget->setRowCount(currentRow + 1);
             QTableWidgetItem *imageItem = new QTableWidgetItem();
             imageItem->setIcon(getBookingIcon(b));
             ui->travelBookingsTableWidget->setItem(currentRow, BOOKING_TYPE, imageItem);
-            ui->travelBookingsTableWidget->setItem(currentRow, BOOKING_START, new QTableWidgetItem(locale.toString(b->getFromDate(), "dddd, d. MMMM yyyy")));
-            ui->travelBookingsTableWidget->setItem(currentRow, BOOKING_END, new QTableWidgetItem(locale.toString(b->getToDate(), "dddd, d. MMMM yyyy")));
-            ui->travelBookingsTableWidget->setItem(currentRow, BOOKING_PRICE, new QTableWidgetItem(QString::number(b->getPrice())));
+            ui->travelBookingsTableWidget->setItem(currentRow, BOOKING_START, new QTableWidgetItem(
+                    locale.toString(b->getFromDate(), "dddd, d. MMMM yyyy")));
+            ui->travelBookingsTableWidget->setItem(currentRow, BOOKING_END, new QTableWidgetItem(
+                    locale.toString(b->getToDate(), "dddd, d. MMMM yyyy")));
+            ui->travelBookingsTableWidget->setItem(currentRow, BOOKING_PRICE,
+                                                   new QTableWidgetItem(QString::number(b->getPrice())));
             currentRow = ui->travelBookingsTableWidget->rowCount();
 
             bookingIndices[index] = b;
@@ -130,13 +131,11 @@ void TravelAgencyUI::loadBookings(long travelId) {
 
 QIcon TravelAgencyUI::getBookingIcon(Booking *booking) {
 
-    if(FlightBooking* flightBooking = dynamic_cast<FlightBooking*>(booking)){
+    if (FlightBooking *flightBooking = dynamic_cast<FlightBooking *>(booking)) {
         return QIcon("../Images/Flight.png");
-    }
-    else if(HotelBooking* hotelBooking = dynamic_cast<HotelBooking*>(booking)){
+    } else if (HotelBooking *hotelBooking = dynamic_cast<HotelBooking *>(booking)) {
         return QIcon("../Images/Hotel.png");
-    }
-    else if(RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(booking)){
+    } else if (RentalCarReservation *rentalCarReservation = dynamic_cast<RentalCarReservation *>(booking)) {
         return QIcon("../Images/Car.png");
     }
 
@@ -155,20 +154,18 @@ void TravelAgencyUI::loadBookingDetails() {
     ui->bookingEndDateEdit->setDate(activeBooking->getToDate());
     ui->bookingPriceEdit->setValue(activeBooking->getPrice());
 
-    if(FlightBooking* flightBooking = dynamic_cast<FlightBooking*>(activeBooking)){
+    if (FlightBooking *flightBooking = dynamic_cast<FlightBooking *>(activeBooking)) {
         ui->bookingTabWidget->setCurrentWidget(ui->flightTab);
         ui->flightStartLineEdit->setText(QString::fromStdString(flightBooking->getFromDestination()));
         ui->flightEndLineEdit->setText(QString::fromStdString(flightBooking->getToDestination()));
         ui->flightAirlineLineEdit->setText(QString::fromStdString(flightBooking->getAirline()));
         ui->flightClassLineEdit->setText(QString::fromStdString(flightBooking->getBookingClass()));
-    }
-    else if(HotelBooking* hotelBooking = dynamic_cast<HotelBooking*>(activeBooking)){
+    } else if (HotelBooking *hotelBooking = dynamic_cast<HotelBooking *>(activeBooking)) {
         ui->bookingTabWidget->setCurrentWidget(ui->hotelTab);
         ui->hotelNameLineEdit->setText(QString::fromStdString(hotelBooking->getHotel()));
         ui->hotelTownLineEdit->setText(QString::fromStdString(hotelBooking->getTown()));
         ui->hotelRoomLineEdit->setText(QString::fromStdString(hotelBooking->getRoomType()));
-    }
-    else if(RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(activeBooking)){
+    } else if (RentalCarReservation *rentalCarReservation = dynamic_cast<RentalCarReservation *>(activeBooking)) {
         ui->bookingTabWidget->setCurrentWidget(ui->rentalTab);
         ui->rentalPickupLineEdit->setText(QString::fromStdString(rentalCarReservation->getPickupLocation()));
         ui->rentalReturnLineEdit->setText(QString::fromStdString(rentalCarReservation->getReturnLocation()));
@@ -179,23 +176,21 @@ void TravelAgencyUI::loadBookingDetails() {
 
 
 void TravelAgencyUI::onSaveBookingsButtonClicked() {
-    Booking* booking = travelAgency->findBooking(ui->bookingIdLineEdit->text().toStdString());
+    Booking *booking = travelAgency->findBooking(ui->bookingIdLineEdit->text().toStdString());
     booking->setFromDate(ui->bookingStartDateEdit->date().toString("yyyyMMdd").toStdString());
     booking->setToDate(ui->bookingEndDateEdit->date().toString("yyyyMMdd").toStdString());
     booking->setPrice(ui->bookingPriceEdit->value());
 
-    if(FlightBooking* flightBooking = dynamic_cast<FlightBooking*>(booking)){
+    if (FlightBooking *flightBooking = dynamic_cast<FlightBooking *>(booking)) {
         flightBooking->setFromDestination(ui->flightStartLineEdit->text().toStdString());
         flightBooking->setToDestination(ui->flightEndLineEdit->text().toStdString());
         flightBooking->setAirline(ui->flightAirlineLineEdit->text().toStdString());
         flightBooking->setBookingClass(ui->flightClassLineEdit->text().toStdString());
-    }
-    else if(HotelBooking* hotelBooking = dynamic_cast<HotelBooking*>(booking)){
+    } else if (HotelBooking *hotelBooking = dynamic_cast<HotelBooking *>(booking)) {
         hotelBooking->setHotel(ui->hotelNameLineEdit->text().toStdString());
         hotelBooking->setTown(ui->hotelTownLineEdit->text().toStdString());
         hotelBooking->setRoomType(ui->hotelRoomLineEdit->text().toStdString());
-    }
-    else if(RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(booking)){
+    } else if (RentalCarReservation *rentalCarReservation = dynamic_cast<RentalCarReservation *>(booking)) {
         rentalCarReservation->setPickupLocation(ui->rentalPickupLineEdit->text().toStdString());
         rentalCarReservation->setReturnLocation(ui->rentalReturnLineEdit->text().toStdString());
         rentalCarReservation->setCompany(ui->rentalCompanyLineEdit->text().toStdString());
@@ -207,57 +202,8 @@ void TravelAgencyUI::onSaveBookingsButtonClicked() {
 }
 
 
-
 void TravelAgencyUI::onCancelBookingsButtonClicked() {
     loadBookingDetails();
 }
 
-/*void TravelAgencyUI::addBookingToListWidget(std::vector<Booking *> bookings) {
-    for(auto b : bookings){
-        QString bookingStr = QString(QString::fromStdString(b->showDetails()));
 
-        QListWidgetItem* item = new QListWidgetItem(bookingStr, ui->listWidget);
-        QSharedPointer<Booking*> bookingPtr = QSharedPointer<Booking*>::create(b);
-        QVariant bookingData;
-        bookingData.setValue(bookingPtr);
-        item->setData(Qt::UserRole, bookingData);
-    }
-}
- */
-
-/*void TravelAgencyUI::onBookingListItemDoubleClicked(QListWidgetItem* item) {
-    QVariant bookingData = item->data(Qt::UserRole);
-    QSharedPointer<Booking*> bookingPtr = bookingData.value<QSharedPointer<Booking*>>();
-    Booking* booking = *bookingPtr;
-    if(FlightBooking* flightBooking = dynamic_cast<FlightBooking*>(booking)){
-        ui->tabWidget->setCurrentWidget(ui->flightTab);
-        ui->flightIdLineEdit->setText(QString::fromStdString(flightBooking->getId()));
-        ui->flightFromDateEdit->setDate(QDate::fromString(QString::fromStdString(flightBooking->getFromDate()), "yyyyMMdd"));
-        ui->flightToDateEdit->setDate(QDate::fromString(QString::fromStdString(flightBooking->getToDate()), "yyyyMMdd"));
-        ui->fromAirportLineEdit->setText(QString::fromStdString(flightBooking->getFromDestination()));
-        ui->toAirportLineEdit->setText(QString::fromStdString(flightBooking->getToDestination()));
-        ui->airlineLineEdit->setText(QString::fromStdString(flightBooking->getAirline()));
-        ui->flightPriceEdit->setValue(flightBooking->getPrice());
-    }
-    else if(HotelBooking* hotelBooking = dynamic_cast<HotelBooking*>(booking)){
-        ui->tabWidget->setCurrentWidget(ui->hotelTab);
-        ui->hotelIdLineEdit->setText(QString::fromStdString(hotelBooking->getId()));
-        ui->hotelFromDateEdit->setDate(QDate::fromString(QString::fromStdString(hotelBooking->getFromDate()), "yyyyMMdd"));
-        ui->hotelToDateEdit->setDate(QDate::fromString(QString::fromStdString(hotelBooking->getToDate()), "yyyyMMdd"));
-        ui->hotelLineEdit->setText(QString::fromStdString(hotelBooking->getHotel()));
-        ui->cityLineEdit->setText(QString::fromStdString(hotelBooking->getTown()));
-        ui->hotelPriceEdit->setValue(hotelBooking->getPrice());
-    }
-    else if(RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(booking)){
-        ui->tabWidget->setCurrentWidget(ui->rentalCarTab);
-        ui->rentalCarIdLineEdit->setText(QString::fromStdString(rentalCarReservation->getId()));
-        ui->rentalCarFromDateEdit->setDate(QDate::fromString(QString::fromStdString(rentalCarReservation->getFromDate()), "yyyyMMdd"));
-        ui->rentalCarToDateEdit->setDate(QDate::fromString(QString::fromStdString(rentalCarReservation->getToDate()), "yyyyMMdd"));
-        ui->pickupLocationLineEdit->setText(QString::fromStdString(rentalCarReservation->getPickupLocation()));
-        ui->returnLocationLineEdit->setText(QString::fromStdString(rentalCarReservation->getReturnLocation()));
-        ui->companyLineEdit->setText(QString::fromStdString(rentalCarReservation->getCompany()));
-        ui->rentalCarPriceEdit->setValue(rentalCarReservation->getPrice());
-    }
-
-}
- */

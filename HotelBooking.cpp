@@ -4,10 +4,13 @@
 
 #include "HotelBooking.h"
 #include <iomanip>
+
 using namespace std;
 
-HotelBooking::HotelBooking(std::string id, double price, std::string fromDate, std::string toDate, long travelId,std::string _hotel,
-                           std::string _town, std::string _roomType) : Booking(id, price, fromDate, toDate, travelId), hotel(_hotel), town(_town), roomType(_roomType){
+HotelBooking::HotelBooking(std::string id, double price, std::string fromDate, std::string toDate, long travelId,
+                           std::string _hotel,
+                           std::string _town, std::string _roomType) : Booking(id, price, fromDate, toDate, travelId),
+                                                                       hotel(_hotel), town(_town), roomType(_roomType) {
     roomTypes["EZ"] = "Einzelzimmer";
     roomTypes["DZ"] = "Doppelzimmer";
     roomTypes["AP"] = "Appartment";
@@ -16,6 +19,7 @@ HotelBooking::HotelBooking(std::string id, double price, std::string fromDate, s
     roomType = roomTypes[roomType];
 
 }
+
 HotelBooking::~HotelBooking() {
     std::cout << "HotelBooking object destroyed" << std::endl;
 }

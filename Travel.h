@@ -17,11 +17,12 @@ class Travel {
 private:
     long id;
     long customerId;
-    std::vector<Booking*> travelBookings;
+    std::vector<Booking *> travelBookings;
 
 public:
     Travel(long _id, long _customerId);
-    void addBooking(Booking* booking);
+
+    void addBooking(Booking *booking);
 
     long getId() const;
 
@@ -30,6 +31,7 @@ public:
     const std::vector<Booking *> &getTravelBookings() const;
 
     QDate getStartDate();
+
     QDate getEndDate();
 
 };

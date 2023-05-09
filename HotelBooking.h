@@ -4,11 +4,12 @@
 
 #ifndef PG2PRAKTIKUM1_HOTELBOOKING_H
 #define PG2PRAKTIKUM1_HOTELBOOKING_H
+
 #include <iostream>
 #include "Booking.h"
 #include <map>
 
-class HotelBooking : public Booking{
+class HotelBooking : public Booking {
 
 private:
     std::string hotel;
@@ -17,8 +18,11 @@ private:
     std::map<std::string, std::string> roomTypes;
 
 public:
-    HotelBooking(std::string id, double price, std::string fromDate, std::string toDate, long travelId, std::string _hotel, std::string _town, std::string _roomType);
+    HotelBooking(std::string id, double price, std::string fromDate, std::string toDate, long travelId,
+                 std::string _hotel, std::string _town, std::string _roomType);
+
     ~HotelBooking();
+
     std::string showDetails();
 
     const std::string &getHotel() const;

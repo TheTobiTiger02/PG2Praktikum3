@@ -4,7 +4,7 @@
 
 #include "Customer.h"
 
-Customer::Customer(long _id, std::string _name) : id(_id), name(_name){
+Customer::Customer(long _id, std::string _name) : id(_id), name(_name) {
 
 }
 
