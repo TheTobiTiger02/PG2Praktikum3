@@ -15,21 +15,28 @@
 #include "Customer.h"
 #include "Travel.h"
 
-class TravelAgency{
+class TravelAgency {
 private:
     //QMessageBox* msgBox;
-    std::vector<Booking*> allBookings;
-    std::vector<Customer*> allCustomers;
-    std::vector<Travel*> allTravels;
+    std::vector<Booking *> allBookings;
+    std::vector<Customer *> allCustomers;
+    std::vector<Travel *> allTravels;
 
 
 public:
     ~TravelAgency();
-    void readFile(std::string filePath, int startRow = 0, int flightCount = 0, int hotelCount = 0, int carCount = 0, int travelCount = 0, int customerCount = 0, double totalPrice = 0);
-    Booking* findBooking(std::string id);
-    Travel* findTravel(long id);
-    Customer* findCustomer(long id);
+
+    void readFile(std::string filePath, int startRow = 0, int flightCount = 0, int hotelCount = 0, int carCount = 0,
+                  int travelCount = 0, int customerCount = 0, double totalPrice = 0);
+
+    Booking *findBooking(std::string id);
+
+    Travel *findTravel(long id);
+
+    Customer *findCustomer(long id);
+
     int getTravelCount(long customerId);
+
     int getBookingCount(long travelId);
 
     const std::vector<Booking *> &getAllBookings() const;
@@ -41,7 +48,9 @@ public:
     const std::vector<Booking *> &getBookings() const;
 
 private slots:
+
     void changeInformativeText();
 
 };
+
 #endif //PG2PRAKTIKUM1_TRAVELAGENCY_H

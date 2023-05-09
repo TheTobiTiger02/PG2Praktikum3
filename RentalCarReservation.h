@@ -4,10 +4,11 @@
 
 #ifndef PG2PRAKTIKUM1_RENTALCARRESERVATION_H
 #define PG2PRAKTIKUM1_RENTALCARRESERVATION_H
+
 #include <iostream>
 #include "Booking.h"
 
-class RentalCarReservation : public Booking{
+class RentalCarReservation : public Booking {
 
 private:
     std::string pickupLocation;
@@ -16,8 +17,12 @@ private:
     std::string vehicleClass;
 
 public:
-    RentalCarReservation(std::string id, double price, std::string fromDate, std::string toDate, long travelId, std::string _pickupLocation, std::string _returnLocation, std::string _company, std::string _vehicleClass);
+    RentalCarReservation(std::string id, double price, std::string fromDate, std::string toDate, long travelId,
+                         std::string _pickupLocation, std::string _returnLocation, std::string _company,
+                         std::string _vehicleClass);
+
     ~RentalCarReservation();
+
     std::string showDetails();
 
 

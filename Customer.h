@@ -14,11 +14,12 @@ class Customer {
 
     long id;
     std::string name;
-    std::vector<Travel*> travelList;
+    std::vector<Travel *> travelList;
 
 public:
     Customer(long _id, std::string _name);
-    void addTravel(Travel* travel);
+
+    void addTravel(Travel *travel);
 
     long getId() const;
 

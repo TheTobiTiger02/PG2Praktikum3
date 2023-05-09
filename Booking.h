@@ -4,6 +4,7 @@
 
 #ifndef PG2PRAKTIKUM1_BOOKING_H
 #define PG2PRAKTIKUM1_BOOKING_H
+
 #include <iostream>
 #include <QDate>
 
@@ -18,7 +19,9 @@ protected:
 
 public:
     Booking(std::string _id, double _price, std::string _fromDate, std::string _toDate, long _travelId);
+
     virtual ~Booking();
+
     virtual std::string showDetails() = 0;
 
     const std::string &getId() const;

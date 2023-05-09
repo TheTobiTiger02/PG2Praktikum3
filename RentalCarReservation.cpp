@@ -5,12 +5,24 @@
 
 #include "RentalCarReservation.h"
 #include <iomanip>
+
 using namespace std;
 
-RentalCarReservation::RentalCarReservation(std::string id, double price, std::string fromDate, std::string toDate, long travelId,
+RentalCarReservation::RentalCarReservation(std::string id, double price, std::string fromDate, std::string toDate,
+                                           long travelId,
                                            std::string _pickupLocation, std::string _returnLocation,
-                                           std::string _company, std::string _vehicleClass) : Booking(id, price, fromDate, toDate, travelId), pickupLocation(_pickupLocation), returnLocation(_returnLocation), company(_company), vehicleClass(_vehicleClass){
+                                           std::string _company, std::string _vehicleClass) : Booking(id, price,
+                                                                                                      fromDate, toDate,
+                                                                                                      travelId),
+                                                                                              pickupLocation(
+                                                                                                      _pickupLocation),
+                                                                                              returnLocation(
+                                                                                                      _returnLocation),
+                                                                                              company(_company),
+                                                                                              vehicleClass(
+                                                                                                      _vehicleClass) {
 }
+
 RentalCarReservation::~RentalCarReservation() {
     std::cout << "RentalCarReservation object destroyed" << std::endl;
 }
@@ -20,9 +32,9 @@ string RentalCarReservation::showDetails() {
     ss << std::fixed << std::setprecision(2) << price;
 
     return "Mietwagenreservierung mit " + company + ". Abholung am " + fromDate + " in " + pickupLocation +
-    ". Rueckgabe am " + toDate + " in " + returnLocation + " mit der Fahrzeugklasse " + vehicleClass + ". Preis: " + ss.str() + " Euro";
+           ". Rueckgabe am " + toDate + " in " + returnLocation + " mit der Fahrzeugklasse " + vehicleClass +
+           ". Preis: " + ss.str() + " Euro";
 }
-
 
 
 const string &RentalCarReservation::getPickupLocation() const {

@@ -4,20 +4,24 @@
 
 #include "FlightBooking.h"
 #include <iomanip>
+
 using namespace std;
 
 FlightBooking::FlightBooking(std::string id, double price, std::string fromDate, std::string toDate, long travelId,
-                             std::string _fromDestination, std::string _toDestination, std::string _airline, char bookingChar) : Booking(id, price, fromDate, toDate, travelId), fromDestination(_fromDestination), toDestination(_toDestination), airline(_airline) {
+                             std::string _fromDestination, std::string _toDestination, std::string _airline,
+                             char bookingChar) : Booking(id, price, fromDate, toDate, travelId),
+                                                 fromDestination(_fromDestination), toDestination(_toDestination),
+                                                 airline(_airline) {
     bookingClasses['Y'] = "Economy class";
     bookingClasses['W'] = "Premium Economy class";
     bookingClasses['J'] = "Business class";
     bookingClasses['F'] = "First class";
 
 
-
     bookingClass = bookingClasses[bookingChar];
 
 }
+
 FlightBooking::~FlightBooking() {
     std::cout << "FlightBooking object destroyed" << std::endl;
 }
@@ -27,7 +31,7 @@ string FlightBooking::showDetails() {
     ss << std::fixed << std::setprecision(2) << price;
 
     return "Flugbuchung von " + fromDestination + " nach " + toDestination + " mit " + airline +
-    " am " + fromDate + " mit der Buchungsklasse " + bookingClass + ". Preis: " + ss.str() + " Euro";
+           " am " + fromDate + " mit der Buchungsklasse " + bookingClass + ". Preis: " + ss.str() + " Euro";
 
 }
 

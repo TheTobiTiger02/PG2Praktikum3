@@ -4,11 +4,12 @@
 
 #ifndef PG2PRAKTIKUM1_FLIGHTBOOKING_H
 #define PG2PRAKTIKUM1_FLIGHTBOOKING_H
+
 #include <iostream>
 #include "Booking.h"
 #include <map>
 
-class FlightBooking : public Booking{
+class FlightBooking : public Booking {
 
 private:
     std::string fromDestination;
@@ -19,8 +20,11 @@ private:
 
 
 public:
-    FlightBooking(std::string id, double price, std::string fromDate, std::string toDate, long travelId, std::string _fromDestination, std::string _toDestination, std::string _airline, char bookingChar);
+    FlightBooking(std::string id, double price, std::string fromDate, std::string toDate, long travelId,
+                  std::string _fromDestination, std::string _toDestination, std::string _airline, char bookingChar);
+
     ~FlightBooking();
+
     std::string showDetails();
 
     void setFromDestination(const std::string &fromDestination);
