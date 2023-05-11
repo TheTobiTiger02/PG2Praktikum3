@@ -22,8 +22,8 @@ TravelAgency::~TravelAgency() {
     allBookings.clear();
 }
 
-void
-TravelAgency::readFile(string filePath, int startRow, int flightCount, int hotelCount, int carCount, int travelCount,
+
+void TravelAgency::readFile(string filePath, int startRow, int flightCount, int hotelCount, int carCount, int travelCount,
                        int customerCount, double totalPrice) {
     ifstream file(filePath);
     //msgBox = new QMessageBox;

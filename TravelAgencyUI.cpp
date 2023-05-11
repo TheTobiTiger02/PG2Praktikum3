@@ -24,6 +24,26 @@ TravelAgencyUI::TravelAgencyUI(TravelAgency *_travelAgency, QWidget *parent) : Q
             SLOT(onTravelBookingListDoubleClicked()));
     connect(ui->saveBookingButton, SIGNAL(clicked(bool)), this, SLOT(onSaveBookingsButtonClicked()));
     connect(ui->cancelBookingButton, SIGNAL(clicked(bool)), this, SLOT(onCancelBookingsButtonClicked()));
+
+    connect(ui->bookingStartDateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(onStartDateChanged()));
+    connect(ui->bookingEndDateEdit, SIGNAL(dateChanged(QDate)), this, SLOT(onEndDateChanged()));
+    connect(ui->bookingPriceEdit, SIGNAL(valueChanged(double)), this, SLOT(onPriceChanged()));
+
+    connect(ui->flightStartLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onStartAirportChanged()));
+    connect(ui->flightEndLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onEndAirportChanged()));
+    connect(ui->flightAirlineLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onAirlineChanged()));
+    connect(ui->flightClassLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onBookingClassChanged()));
+
+    connect(ui->hotelNameLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onHotelNameChanged()));
+    connect(ui->hotelTownLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onHotelTownChanged()));
+    connect(ui->hotelRoomLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onHotelRoomTypeChanged()));
+
+    connect(ui->rentalPickupLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onPickupLocationChanged()));
+    connect(ui->rentalReturnLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onReturnLocationChanged()));
+    connect(ui->rentalCompanyLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onCompanyChanged()));
+    connect(ui->rentalClassLineEdit, SIGNAL(textChanged(const QString &)), this, SLOT(onVehicleClassChanged()));
+
+
     ui->customerGroupBox->setVisible(false);
     ui->customerTravelsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->customerTravelsTableWidget->setColumnWidth(0, 100);
@@ -156,17 +176,23 @@ void TravelAgencyUI::loadBookingDetails() {
 
     if (FlightBooking *flightBooking = dynamic_cast<FlightBooking *>(activeBooking)) {
         ui->bookingTabWidget->setCurrentWidget(ui->flightTab);
+        ui->hotelTab->setEnabled(false);
+        ui->rentalTab->setEnabled(false);
         ui->flightStartLineEdit->setText(QString::fromStdString(flightBooking->getFromDestination()));
         ui->flightEndLineEdit->setText(QString::fromStdString(flightBooking->getToDestination()));
         ui->flightAirlineLineEdit->setText(QString::fromStdString(flightBooking->getAirline()));
         ui->flightClassLineEdit->setText(QString::fromStdString(flightBooking->getBookingClass()));
     } else if (HotelBooking *hotelBooking = dynamic_cast<HotelBooking *>(activeBooking)) {
         ui->bookingTabWidget->setCurrentWidget(ui->hotelTab);
+        ui->flightTab->setEnabled(false);
+        ui->rentalTab->setEnabled(false);
         ui->hotelNameLineEdit->setText(QString::fromStdString(hotelBooking->getHotel()));
         ui->hotelTownLineEdit->setText(QString::fromStdString(hotelBooking->getTown()));
         ui->hotelRoomLineEdit->setText(QString::fromStdString(hotelBooking->getRoomType()));
     } else if (RentalCarReservation *rentalCarReservation = dynamic_cast<RentalCarReservation *>(activeBooking)) {
         ui->bookingTabWidget->setCurrentWidget(ui->rentalTab);
+        ui->flightTab->setEnabled(false);
+        ui->hotelTab->setEnabled(false);
         ui->rentalPickupLineEdit->setText(QString::fromStdString(rentalCarReservation->getPickupLocation()));
         ui->rentalReturnLineEdit->setText(QString::fromStdString(rentalCarReservation->getReturnLocation()));
         ui->rentalCompanyLineEdit->setText(QString::fromStdString(rentalCarReservation->getCompany()));
@@ -199,11 +225,99 @@ void TravelAgencyUI::onSaveBookingsButtonClicked() {
     loadTravels(ui->customerIdLineEdit->text().toLong());
     loadBookings(ui->travelIdLineEdit->text().toLong());
 
+    ui->saveBookingButton->setEnabled(false);
+    ui->cancelBookingButton->setEnabled(false);
+
 }
 
 
 void TravelAgencyUI::onCancelBookingsButtonClicked() {
     loadBookingDetails();
+    ui->saveBookingButton->setEnabled(false);
+    ui->cancelBookingButton->setEnabled(false);
 }
+
+void TravelAgencyUI::onStartDateChanged() {
+    ui->saveBookingButton->setEnabled(activeBooking->getFromDate() != ui->bookingStartDateEdit->date());
+    ui->cancelBookingButton->setEnabled(activeBooking->getFromDate() != ui->bookingStartDateEdit->date());
+}
+
+void TravelAgencyUI::onEndDateChanged() {
+    ui->saveBookingButton->setEnabled(activeBooking->getToDate() == ui->bookingEndDateEdit->date());
+    ui->cancelBookingButton->setEnabled(activeBooking->getToDate() == ui->bookingEndDateEdit->date());
+}
+
+void TravelAgencyUI::onPriceChanged() {
+    ui->saveBookingButton->setEnabled(activeBooking->getPrice() != ui->bookingPriceEdit->value());
+    ui->cancelBookingButton->setEnabled(activeBooking->getPrice() != ui->bookingPriceEdit->value());
+}
+
+void TravelAgencyUI::onStartAirportChanged() {
+    FlightBooking *flightBooking = dynamic_cast<FlightBooking *>(activeBooking);
+    ui->saveBookingButton->setEnabled(flightBooking->getFromDestination() != ui->flightStartLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(flightBooking->getFromDestination() != ui->flightStartLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onEndAirportChanged() {
+    FlightBooking *flightBooking = dynamic_cast<FlightBooking *>(activeBooking);
+    ui->saveBookingButton->setEnabled(flightBooking->getToDestination() != ui->flightEndLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(flightBooking->getToDestination() != ui->flightEndLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onAirlineChanged() {
+    FlightBooking *flightBooking = dynamic_cast<FlightBooking *>(activeBooking);
+    ui->saveBookingButton->setEnabled(flightBooking->getAirline() != ui->flightAirlineLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(flightBooking->getAirline() != ui->flightAirlineLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onBookingClassChanged() {
+    FlightBooking *flightBooking = dynamic_cast<FlightBooking *>(activeBooking);
+    ui->saveBookingButton->setEnabled(flightBooking->getBookingClass() != ui->flightClassLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(flightBooking->getBookingClass() != ui->flightClassLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onHotelNameChanged() {
+    HotelBooking *hotelBooking = dynamic_cast<HotelBooking *>(activeBooking);
+    ui->saveBookingButton->setEnabled(hotelBooking->getHotel() != ui->hotelNameLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(hotelBooking->getHotel() != ui->hotelNameLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onHotelTownChanged() {
+    HotelBooking *hotelBooking = dynamic_cast<HotelBooking *>(activeBooking);
+    ui->saveBookingButton->setEnabled(hotelBooking->getTown() != ui->hotelTownLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(hotelBooking->getTown() != ui->hotelTownLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onHotelRoomTypeChanged() {
+    HotelBooking *hotelBooking = dynamic_cast<HotelBooking *>(activeBooking);
+    ui->saveBookingButton->setEnabled(hotelBooking->getRoomType() != ui->hotelRoomLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(hotelBooking->getRoomType() != ui->hotelRoomLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onPickupLocationChanged() {
+    RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(activeBooking);
+    ui->saveBookingButton->setEnabled(rentalCarReservation->getPickupLocation() != ui->rentalPickupLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(rentalCarReservation->getPickupLocation() != ui->rentalPickupLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onReturnLocationChanged() {
+    RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(activeBooking);
+    ui->saveBookingButton->setEnabled(rentalCarReservation->getReturnLocation() != ui->rentalReturnLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(rentalCarReservation->getReturnLocation() != ui->rentalReturnLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onCompanyChanged() {
+    RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(activeBooking);
+    ui->saveBookingButton->setEnabled(rentalCarReservation->getCompany() != ui->rentalCompanyLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(rentalCarReservation->getCompany() != ui->rentalCompanyLineEdit->text().toStdString());
+}
+
+void TravelAgencyUI::onVehicleClassChanged() {
+    RentalCarReservation* rentalCarReservation = dynamic_cast<RentalCarReservation*>(activeBooking);
+    ui->saveBookingButton->setEnabled(rentalCarReservation->getVehicleClass() != ui->rentalClassLineEdit->text().toStdString());
+    ui->cancelBookingButton->setEnabled(rentalCarReservation->getVehicleClass() != ui->rentalClassLineEdit->text().toStdString());
+}
+
+
 
 

@@ -60,6 +60,25 @@ private slots:
 
     void onCancelBookingsButtonClicked();
 
+    void onStartDateChanged();
+    void onEndDateChanged();
+    void onPriceChanged();
+
+    void onStartAirportChanged();
+    void onEndAirportChanged();
+    void onAirlineChanged();
+    void onBookingClassChanged();
+
+    void onHotelNameChanged();
+    void onHotelTownChanged();
+    void onHotelRoomTypeChanged();
+
+    void onPickupLocationChanged();
+    void onReturnLocationChanged();
+    void onCompanyChanged();
+    void onVehicleClassChanged();
+
+
 };
 
 

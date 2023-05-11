@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1220</width>
-    <height>640</height>
+    <height>661</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -313,7 +313,7 @@
              <x>10</x>
              <y>20</y>
              <width>331</width>
-             <height>118</height>
+             <height>137</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -382,7 +382,7 @@
              <x>10</x>
              <y>10</y>
              <width>331</width>
-             <height>88</height>
+             <height>102</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout">
@@ -437,7 +437,7 @@
              <x>10</x>
              <y>10</y>
              <width>331</width>
-             <height>118</height>
+             <height>137</height>
             </rect>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -498,6 +498,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="QPushButton" name="saveBookingButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Speichern</string>
            </property>
@@ -505,6 +508,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="cancelBookingButton">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>Abbrechen</string>
            </property>
@@ -523,7 +529,7 @@
      <x>0</x>
      <y>0</y>
      <width>1220</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
