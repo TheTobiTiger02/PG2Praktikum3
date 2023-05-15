@@ -15,6 +15,7 @@
 TravelAgencyUI::TravelAgencyUI(TravelAgency *_travelAgency, QWidget *parent) : QMainWindow(parent),
                                                                                ui(new Ui::TravelAgencyUI),
                                                                                travelAgency(_travelAgency) {
+
     ui->setupUi(this);
     connect(ui->actionEinlesen, SIGNAL(triggered()), this, SLOT(onFileOpen()));
     connect(ui->actionSuchen, SIGNAL(triggered(bool)), this, SLOT(onCustomerSearch()));
