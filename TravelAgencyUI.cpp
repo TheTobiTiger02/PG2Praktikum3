@@ -244,8 +244,8 @@ void TravelAgencyUI::onStartDateChanged() {
 }
 
 void TravelAgencyUI::onEndDateChanged() {
-    ui->saveBookingButton->setEnabled(activeBooking->getToDate() == ui->bookingEndDateEdit->date());
-    ui->cancelBookingButton->setEnabled(activeBooking->getToDate() == ui->bookingEndDateEdit->date());
+    ui->saveBookingButton->setEnabled(activeBooking->getToDate() != ui->bookingEndDateEdit->date());
+    ui->cancelBookingButton->setEnabled(activeBooking->getToDate() != ui->bookingEndDateEdit->date());
 }
 
 void TravelAgencyUI::onPriceChanged() {

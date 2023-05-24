@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     TravelAgencyUI tu(&travelAgency);
     tu.show();
-    return QApplication::exec();
+    return a.exec();
 
 
 }
