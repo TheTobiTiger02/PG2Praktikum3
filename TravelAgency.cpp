@@ -119,7 +119,7 @@ void TravelAgency::readFile(string filePath, int startRow, int flightCount, int 
                     throw runtime_error("Leeres Attribut 'town' in Zeile " + to_string(i + 1));
                 }
                 if (data.at(i)["roomType"].is_null() || data.at(i)["roomType"].empty() ||
-                    data.at(i)["roomType"].get<string>().length() == 0) {
+                data.at(i)["roomType"].get<string>().length() == 0) {
                     throw runtime_error("Leeres Attribut 'roomType' in Zeile " + to_string(i + 1));
                 }
                 booking = new HotelBooking(id, price, fromDate, toDate, travelId, data.at(i)["hotel"],
@@ -175,7 +175,6 @@ void TravelAgency::readFile(string filePath, int startRow, int flightCount, int 
             } else {
                 findCustomer(customerId)->addTravel(travel);
             }
-
 
         }
         catch (runtime_error r) {

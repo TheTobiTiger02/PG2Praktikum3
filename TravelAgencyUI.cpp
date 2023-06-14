@@ -2,8 +2,6 @@
 // Created by GBT B450M-S2H on 21.04.2023.
 //
 
-// You may need to build the project (run Qt uic code generator) to get "ui_TravelAgencyUI.h" resolved
-
 #include "TravelAgencyUI.h"
 #include <QFileDialog>
 #include <iostream>
@@ -60,7 +58,6 @@ TravelAgencyUI::TravelAgencyUI(TravelAgency *_travelAgency, QWidget *parent) : Q
 
     ui->bookingGroupBox->setVisible(false);
 
-
 }
 
 
@@ -71,7 +68,6 @@ TravelAgencyUI::~TravelAgencyUI() {
 void TravelAgencyUI::onFileOpen() {
     QString filePath = QFileDialog::getOpenFileName(this, "Datei auswählen", "*.json");
     travelAgency->readFile(filePath.toStdString());
-
 }
 
 void TravelAgencyUI::onCustomerSearch() {
@@ -92,8 +88,7 @@ void TravelAgencyUI::onCustomerSearch() {
     loadTravels(customerId);
     ui->travelGroupBox->setVisible(false);
     ui->bookingGroupBox->setVisible(false);
-
-
+    
 }
 
 void TravelAgencyUI::loadTravels(long customerId) {
@@ -230,7 +225,6 @@ void TravelAgencyUI::onSaveBookingsButtonClicked() {
     ui->cancelBookingButton->setEnabled(false);
 
 }
-
 
 void TravelAgencyUI::onCancelBookingsButtonClicked() {
     loadBookingDetails();
